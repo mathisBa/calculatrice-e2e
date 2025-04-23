@@ -10,15 +10,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+
       - name: Install dependencies
         run: npm install
+
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
+      # 1) Démarrage du serveur Vite en arrière-plan
+      - name: Start dev server
+        run: npm run dev &
+
+      # 2) Attente que le serveur réponde (code HTTP 200)
+      - name: Wait for server
+        run: npx wait-on http://localhost:5173
+
+      # 3) Lancement des tests E2E
       - name: Run Playwright tests
         run: npx playwright test
+
+      # 4) Upload du rapport
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
