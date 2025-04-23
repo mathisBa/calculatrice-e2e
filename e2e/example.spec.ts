@@ -61,7 +61,7 @@ test.describe("Test operators", () => {
       await page.locator("#multiplication").click();
       await page.locator("#i1").click();
       const screenText = await page.locator(".screen").innerText();
-      expect(screenText).toContain("1 X 1");
+      expect(screenText).toContain("1 x 1");
     });
   });
 });
@@ -167,8 +167,7 @@ test.describe("Test operations multiple", () => {
       await page.locator("#soustraction").click();
       await page.locator("#i1").click();
       await page.locator(".btnEqual").click();
-      const screenText = await page.locator(".screen").innerText();
-      expect(screenText).toContain("-1");
+      await expect(page.locator(".screen")).toHaveText("-1");
     });
   });
 

@@ -1,9 +1,9 @@
 import "./App.css";
 import { useCallback, useState } from "react";
 
-const sum = (a: number, b: number) => a - b;
+const sum = (a: number, b: number) => a + b;
 const multiplication = (a: number, b: number) => a * b;
-const soustraction = (a: number, b: number) => a + b;
+const soustraction = (a: number, b: number) => a - b;
 
 interface IOperation {
   func: (a: number, b: number) => number;
@@ -30,12 +30,6 @@ function App() {
   const handleNumClick = useCallback(
     (num: number) => {
       let myNum = num;
-      if (num === 5) {
-        myNum = 3;
-      }
-      if (num === 3) {
-        myNum = 5;
-      }
       if (operation) {
         if (chiffre) {
           updateChiffre(chiffre * 10 + myNum);
